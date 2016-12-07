@@ -24,7 +24,7 @@
       this in META-INF/persistence.xml -->
     <datasource jndi-name="java:jboss/datasources/PostgresTrade" pool-name="primary1"
         enabled="true" use-java-context="true">
-        <connection-url>jdbc:postgresql://localhost:5432/cabo</connection-url>
+        <connection-url>jdbc:postgresql://localhost:5432/postgres</connection-url>
         <driver>postgres</driver>
         <security>
             <user-name>postgres</user-name>
