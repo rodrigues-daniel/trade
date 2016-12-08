@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{cadastroBean.page}'/>
+		<f:event type="preRenderView" listener='#{cadastroBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Cadastro entities"/>
+
+	<ui:define name="header">
+		Cadastro
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Cadastro entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="cadastroBeanExampleNome" value="Nome:"/>
+						<h:panelGroup>
+							<h:inputText id="cadastroBeanExampleNome" value="#{cadastroBean.example.nome}"/>
+							<h:message for="cadastroBeanExampleNome" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="cadastroBeanExampleEndereco" value="Endereco:"/>
+						<h:panelGroup>
+							<h:inputText id="cadastroBeanExampleEndereco" value="#{cadastroBean.example.endereco}"/>
+							<h:message for="cadastroBeanExampleEndereco" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{cadastroBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{cadastroBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="cadastroBeanPageItems" styleClass="data-table" value="#{cadastroBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nome"/>
+					</f:facet>
+					<h:link outcome="/cadastro/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="_itemNome" value="#{_item.nome}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Endereco"/>
+					</f:facet>
+					<h:link outcome="/cadastro/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="_itemEndereco" value="#{_item.endereco}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{cadastroBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>
